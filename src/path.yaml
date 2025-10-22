@@ -1,0 +1,214 @@
+# Vite React Project with GSAP and Tailwind CSS
+
+## Folder Structure
+```
+/src
+  ├── /assets           # For images, icons, and other static files
+  │     ├── /images    # Folder for all images
+  ├── /components       # Reusable UI components
+  │     ├── Header.jsx
+  │     ├── HeroSection.jsx
+  │     ├── Features.jsx
+  │     ├── Testimonials.jsx
+  │     ├── Newsletter.jsx
+  │     ├── Footer.jsx
+  ├── /pages            # Different sections/pages
+  │     ├── Home.jsx
+  ├── /hooks            # Custom hooks (for animations with GSAP)
+  │     ├── useGsapAnimations.js
+  ├── /styles           # Custom styles if needed
+  │     ├── global.css
+  ├── App.jsx           # Main app entry point
+  ├── main.jsx          # ReactDOM rendering
+  ├── index.css         # Tailwind base styles
+```
+
+## Code
+
+### `src/main.jsx`
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+### `src/App.jsx`
+```jsx
+import React from 'react';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Footer from './components/Footer';
+
+const App = () => {
+  return (
+    <div className="font-sans bg-gray-100">
+      <Header />
+      <Home />
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
+```
+
+### `src/pages/Home.jsx`
+```jsx
+import React from 'react';
+import HeroSection from '../components/HeroSection';
+import Features from '../components/Features';
+import Testimonials from '../components/Testimonials';
+import Newsletter from '../components/Newsletter';
+
+const Home = () => {
+  return (
+    <main>
+      <HeroSection />
+      <Features />
+      <Testimonials />
+      <Newsletter />
+    </main>
+  );
+};
+
+export default Home;
+```
+
+### `src/hooks/useGsapAnimations.js`
+```js
+import { useEffect } from 'react';
+import gsap from 'gsap';
+
+const useGsapAnimations = () => {
+  useEffect(() => {
+    gsap.from(".fade-in", { opacity: 0, y: 50, duration: 1, stagger: 0.3 });
+  }, []);
+};
+
+export default useGsapAnimations;
+```
+
+### `src/styles/global.css`
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+```
+
+### `src/index.css`
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### `src/components/Header.jsx`
+```jsx
+import React from 'react';
+
+const Header = () => {
+  return (
+    <header className="bg-white shadow-md p-4">
+      <h1 className="text-2xl font-bold">My Portfolio</h1>
+    </header>
+  );
+};
+
+export default Header;
+```
+
+### `src/components/HeroSection.jsx`
+```jsx
+import React from 'react';
+import useGsapAnimations from '../hooks/useGsapAnimations';
+import heroImage from '../assets/images/hero.jpg';
+
+const HeroSection = () => {
+  useGsapAnimations();
+
+  return (
+    <section className="text-center py-20 bg-gray-200 fade-in">
+      <h2 className="text-4xl font-bold mb-4">Welcome to My Portfolio</h2>
+      <img src={heroImage} alt="Hero" className="mx-auto rounded-lg shadow-lg" />
+    </section>
+  );
+};
+
+export default HeroSection;
+```
+
+### `src/components/Features.jsx`
+```jsx
+import React from 'react';
+
+const Features = () => {
+  return (
+    <section className="text-center py-16 bg-white fade-in">
+      <h2 className="text-3xl font-bold mb-6">Features</h2>
+      <p>Some amazing features about this project.</p>
+    </section>
+  );
+};
+
+export default Features;
+```
+
+### `src/components/Testimonials.jsx`
+```jsx
+import React from 'react';
+
+const Testimonials = () => {
+  return (
+    <section className="text-center py-16 bg-gray-100 fade-in">
+      <h2 className="text-3xl font-bold mb-6">What People Say</h2>
+      <p>Client testimonials go here.</p>
+    </section>
+  );
+};
+
+export default Testimonials;
+```
+
+### `src/components/Newsletter.jsx`
+```jsx
+import React from 'react';
+
+const Newsletter = () => {
+  return (
+    <section className="text-center py-16 bg-blue-100 fade-in">
+      <h2 className="text-3xl font-bold mb-6">Subscribe to Our Newsletter</h2>
+      <input type="email" placeholder="Enter your email" className="p-2 border rounded" />
+    </section>
+  );
+};
+
+export default Newsletter;
+```
+
+### `src/components/Footer.jsx`
+```jsx
+import React from 'react';
+
+const Footer = () => {
+  return (
+    <footer className="bg-gray-800 text-white text-center p-4">
+      <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+    </footer>
+  );
+};
+
+export default Footer;
+```
